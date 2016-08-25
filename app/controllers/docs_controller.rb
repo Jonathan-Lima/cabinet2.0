@@ -7,25 +7,33 @@ class DocsController < ApplicationController
 	end
 
 	def new
+		@doc = Doc.new
 	end
 
 	def create
+		@doc = Doc.new(doc_params)
+
+		if @doc.save
+			redirect_to @doc
+		else
+			render 'new'
 	end
 
 	def edit
-	end
+	end 
 
 	def update
 	end
 
 	def destroy
 	end
+end
 
 	private
+		def find_doc
+		end
 
-		 def find_doc
-		 end
-
-		 def doc_params
-		 end
-end
+		def doc_params
+		 	params.require(:doc).permit(:tittle, :content)
+		end
+	end
